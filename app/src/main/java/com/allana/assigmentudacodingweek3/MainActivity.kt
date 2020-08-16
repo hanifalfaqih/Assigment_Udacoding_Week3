@@ -2,19 +2,14 @@ package com.allana.assigmentudacodingweek3
 
 import android.accounts.NetworkErrorException
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.net.NetworkInfo
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.allana.assigmentudacodingweek3.adapter.NewsAdapter
 import com.allana.assigmentudacodingweek3.model.ArticlesNews
@@ -25,11 +20,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
-    var context = this
-    var connectivity : ConnectivityManager? = null
-    var info : NetworkInfo? = null
+    private var context = this
+    private var connectivity : ConnectivityManager? = null
+    private var info : NetworkInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun isConnected(): Boolean{
+    private fun isConnected(): Boolean{
         connectivity = context.getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivity != null){
             info = connectivity!!.activeNetworkInfo
