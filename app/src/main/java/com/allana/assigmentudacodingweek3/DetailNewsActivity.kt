@@ -1,5 +1,6 @@
 package com.allana.assigmentudacodingweek3
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
@@ -64,9 +65,9 @@ class DetailNewsActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView(url: String) {
-        val webSettings = webView.settings
-        webSettings.javaScriptEnabled = true
+        webView.settings.javaScriptEnabled = true
         webView.webViewClient = WebViewClient()
         webView.webChromeClient = WebChromeClient()
         webView.loadUrl(url)
@@ -81,6 +82,14 @@ class DetailNewsActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
                 super.onPageFinished(view, url)
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (webView.canGoBack()){
+            webView.goBack()
+        } else {
+            super.onBackPressed()
         }
     }
 }
